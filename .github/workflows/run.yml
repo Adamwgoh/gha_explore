@@ -1,0 +1,23 @@
+name: Run Tests
+
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run Tests
+        id: check
+        uses: huggingface-sagemaker-registry/.github/workflows/test-action@feature/docker-extend
+        with:
+          some-input: some-value
+
+      - name: some output
+        shell: bash
+        run: |
+            echo "${{ steps.check.outputs.val1 }}"
